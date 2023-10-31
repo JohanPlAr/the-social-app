@@ -30,7 +30,7 @@ SECRET_KEY = 'django-insecure-m!7@qp-@(ig#-2f=vv85m3z2ciq=bwgdmp9$m05kk3vu!ch4q4
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['https://joplar-social-app.onrender.com', 'localhost']
+ALLOWED_HOSTS = ['joplar-social-app.onrender.com', 'localhost']
 
 
 # Application definition
