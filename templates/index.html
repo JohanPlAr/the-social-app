@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="container-fluid">
+    <div class="row">
+
+        <!-- Blog Entries Column -->
+        <div class="col-12 mt-3 left">
+            <div class="row">
+                {% for post in post_list %}
+                <div class="col-md-4">
+                    <div class="card mb-4">
+                        <div class="card-body">
+                            <div class="image-container">
+                                <img src="{{ post.image.url }}" alt="" class="card-img-top">
+                            <div class="image-flash">
+                                <p class="author">Author: {{ post.author }}</p>
+                            </div>
+                            </div>
+                            <h2 class="card-title">{{post.title}}</h2>
+                            <p class="class-text">{{ post.body }}</p>
+                            <hr />
+                            <p class="card-text"> {{post.created.date}}
+                                <i class="far fa-heart"></i>{{ post.likes }}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                {% if forloop.counter|divisibleby:5 %}
+            </div>
+            <div class="row">
+                {% endif %}
+            
+            {% endfor %}
+        </div>
+    </div>
+
+</div>
+
+{%endblock%}
