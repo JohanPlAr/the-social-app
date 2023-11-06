@@ -7,32 +7,55 @@
 
         <!-- Post Entries Column -->
         <div class="col-12 mt-3 left">
-            <div class="row">
-                {% for post in post_list %}
-                <div class="col-md-4">
+            {% for post in post_list %}
+            <div class="row justify-content-center">
+                
+                <div class="col-md-6">
                     <div class="card mb-4">
                         <div class="card-body">
                             <div class="image-container">
-                                <img src="{{ post.image.url }}" alt="" class="card-img-top">
+                                <img src="https://www.outboundengine.com/wp-content/uploads/socialsharing.jpg" alt="" class="card-img-top">
                             <div class="image-flash">
                                 <p class="author">Author: {{ post.author }}</p>
                             </div>
                             </div>
                             <h2 class="card-title">{{post.title}}</h2>
-                            <p class="class-text">{{ post.body }}</p>
+                            <p class="text-body-secondary"><small>{{post.created_date}}</small></p>
+                            <div id="excerpt{{post.slug}}"><p class="class-text">{{ post.content|truncatewords:25|safe}}</p>
+                            </div>
+                                <p class="d-inline-flex gap-1">
+                                 <button class="btn btn-primary btn-sm readAllBtn" data-id="{{post.slug}}" type="button" 
+                                 data-bs-toggle="collapse" data-bs-target="#fullPost{{post.slug}}" 
+                                 aria-expanded="false" aria-controls="collapse fullPost">
+                                  Read full post
+                                </button>
+                              </p>
+                              <div class="collapse" id="fullPost{{post.slug}}">
+                                <div class="card card-body">
+                                    {{ post.content|safe }}
+                                </div>
+                              </div>
                             <hr />
-                            <p class="card-text"> {{post.created.date}}
+                            <p class="d-inline-flex gap-1">
                                 <i class="far fa-heart"></i>{{ post.likes }}
-                                <i class='fa-sharp fa-light fa-share'></i>{{ post.shares }}
-                                
-                            </p>
+                                <i class="fa fa-share-from-square"></i>{{ post.shares }}
+                                <a data-bs-toggle="collapse" href="#comments" role="button" 
+                                aria-expanded="false" aria-controls="collapse comments"><i class='fa-regular fa-comment'></i>
+                                   </a>
+                             </p>
+                             <div class="collapse" id="comments{{post.slug}}">
+                                <div class="card card-body">
+                                    {{ post.comment }} comments placeholder
+                                </div>
+                              </div>
+                            
+                        
                         </div>
                     </div>
                 </div>
-                {% if forloop.counter|divisibleby:5 %}
+             
             </div>
-            <div class="row">
-                {% endif %}
+          
             
             {% endfor %}
         </div>

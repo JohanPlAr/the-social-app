@@ -7,5 +7,7 @@ class PostList(generic.ListView):
     queryset = Post.objects.filter(status='published')
     template_name = 'index.html'
     paginate_by = 6
+
     
+
 # Create your views here.

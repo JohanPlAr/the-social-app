@@ -10,7 +10,7 @@ class Post(models.Model):
         ('published', 'Published'),
     )
     title = models.CharField(max_length=150)
-    slug = models.SlugField(unique=True)
+    slug = models.SlugField(max_length=200, unique=True)
     author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='posts')
     content = models.TextField()
     image = CloudinaryField('image', default='placeholder')
