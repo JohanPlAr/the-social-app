@@ -5,7 +5,7 @@
 <div class="container-fluid">
     <div class="row">
 
-        <!-- Blog Entries Column -->
+        <!-- Post Entries Column -->
         <div class="col-12 mt-3 left">
             <div class="row">
                 {% for post in post_list %}
@@ -23,6 +23,8 @@
                             <hr />
                             <p class="card-text"> {{post.created.date}}
                                 <i class="far fa-heart"></i>{{ post.likes }}
+                                <i class='fa-sharp fa-light fa-share'></i>{{ post.shares }}
+                                
                             </p>
                         </div>
                     </div>
