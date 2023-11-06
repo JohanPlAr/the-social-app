@@ -1,5 +1,5 @@
-from django.shortcuts import render
-from django.views import generic
+from django.shortcuts import render, get_object_or_404, reverse
+from django.views import generic, View
 from. models import Post
 
 class PostList(generic.ListView):
@@ -7,7 +7,3 @@ class PostList(generic.ListView):
     queryset = Post.objects.filter(status='published')
     template_name = 'index.html'
     paginate_by = 6
-
-    
-
-# Create your views here.

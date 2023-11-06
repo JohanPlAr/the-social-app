@@ -14,38 +14,55 @@
                     <div class="card mb-4">
                         <div class="card-body">
                             <div class="image-container">
-                                <img src="https://www.outboundengine.com/wp-content/uploads/socialsharing.jpg" alt="" class="card-img-top">
+                                {% if "placeholder" in post.image.url %}
+                                <img src="https://www.outboundengine.com/wp-content/uploads/socialsharing.jpg" class="card-img-top">
+                                {% else %}
+                                <img src=" {{ post.image.url }}" class="card-img-top">
+                                {% endif %}
                             <div class="image-flash">
-                                <p class="author">Author: {{ post.author }}</p>
-                            </div>
-                            </div>
+                                <p class="author">Author: {{ post.author|safe }}</p>
+                                                 </div>
                             <h2 class="card-title">{{post.title}}</h2>
                             <p class="text-body-secondary"><small>{{post.created_date}}</small></p>
-                            <div id="excerpt{{post.slug}}"><p class="class-text">{{ post.content|truncatewords:25|safe}}</p>
-                            </div>
+                            <div class="card card-body" id="excerpt{{post.slug}}"><p class="class-text">{{ post.content|truncatewords:25|safe}}
                                 <p class="d-inline-flex gap-1">
-                                 <button class="btn btn-primary btn-sm readAllBtn" data-id="{{post.slug}}" type="button" 
-                                 data-bs-toggle="collapse" data-bs-target="#fullPost{{post.slug}}" 
-                                 aria-expanded="false" aria-controls="collapse fullPost">
-                                  Read full post
-                                </button>
-                              </p>
-                              <div class="collapse" id="fullPost{{post.slug}}">
+                                    <button class="btn btn-primary btn-sm readAllBtn" data-id="{{post.slug}}" type="button" 
+                                    data-bs-toggle="collapse" data-bs-target="#fullPost{{post.slug}}" 
+                                    aria-expanded="false" aria-controls="collapse fullPost">
+                                     Read full post
+                                   </button>
+                                 </p>
+                            </p>
+                            </div>
+                            <div class="collapse" id="fullPost{{post.slug}}">
                                 <div class="card card-body">
                                     {{ post.content|safe }}
+                                    <p class="d-inline-flex gap-1">
+                                        <button class="btn btn-primary btn-sm readAllBtn" data-id="{{post.slug}}" type="button" 
+                                        data-bs-toggle="collapse" data-bs-target="#fullPost{{post.slug}}" 
+                                        aria-expanded="false" aria-controls="collapse fullPost">
+                                         Read full post
+                                       </button>
+                                     </p>
                                 </div>
                               </div>
+                               
+                             
                             <hr />
-                            <p class="d-inline-flex gap-1">
-                                <i class="far fa-heart"></i>{{ post.likes }}
-                                <i class="fa fa-share-from-square"></i>{{ post.shares }}
-                                <a data-bs-toggle="collapse" href="#comments" role="button" 
-                                aria-expanded="false" aria-controls="collapse comments"><i class='fa-regular fa-comment'></i>
+                            <p class="d-inline-flex gap-2">
+                                <i class="far fa-heart"></i>{{ post.number_of_likes }}
+                                <i class="fa fa-share-from-square"></i>{{ post.number_of_shares }}
+                                <a class="commentsBtn" data-bs-toggle="collapse" href="#comments{{post.slug}}" role="button" 
+                                data-id="{{post.slug}}" aria-expanded="false" aria-controls="collapse comments">
+                                <i class='fa-regular fa-comment'></i>
                                    </a>
                              </p>
                              <div class="collapse" id="comments{{post.slug}}">
                                 <div class="card card-body">
-                                    {{ post.comment }} comments placeholder
+                                    
+                                    {% for comment in comment_list %}
+                                    {{ comment.body|safe }}
+                                    {% endfor %}
                                 </div>
                               </div>
                             
